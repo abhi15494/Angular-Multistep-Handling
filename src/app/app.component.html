@@ -1,20 +1,141 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="bg-light py-5 min-vh-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="display-4 text-center mb-5">
+          Angular forms example
+        </h2>
+      </div>
+      <div class="col-12 offset-0 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+        <!-- Form Start -->
+        <form class="bg-white p-4 border" [formGroup]="forms" (ngSubmit)="onFormSubmit(forms.value)">
 
+          <!-- ---------------------------------- -->
+          <!-- FORM STEP 1 for name and telephone -->
+          <!-- ---------------------------------- -->
+          <fieldset class="form-group row mb-0" *ngIf="formstep==1">
+            <legend class="col-form-legend col-sm-12">Form 1</legend>
+            <div class="col-sm-12" formGroupName="form1">
+
+              <!-- Form name field -->
+              <div class="form-group row">
+                <label for="inputName" class="col-sm-12 col-form-label">Name <span class="text-danger">*</span></label>
+                <div class="col-sm-12">
+                  <input type="text" class="form-control" formControlName="name" placeholder="Enter Name">
+                </div>
+              </div>
+              <!-- Form name field -->
+
+              <!-- Form telephone field -->
+              <div class="form-group row">
+                <label for="inputPhone" class="col-sm-12 col-form-label">Telephone no</label>
+                <div class="col-sm-12">
+                  <input type="tel" class="form-control" formControlName="tel" placeholder="Enter Telephone no">
+                </div>
+              </div>
+              <!-- Form telephone field -->
+
+              <div class="form-group row mt-4">
+                <div class="col-sm-10">
+                  <!-- Form Next Step Button -->
+                  <button type="button" class="btn btn-secondary" (click)="stepChange(true)"
+                    [disabled]="forms.get('form1').invalid">
+                    Next
+                  </button>
+                  <!-- Form Next Step Button -->
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <!-- ---------------------------------- -->
+          <!-- ---------------------------------- -->
+
+
+          <!-- ---------------------------------- -->
+          <!-- FORM STEP 2 for email and status response -->
+          <!-- ---------------------------------- -->
+          <fieldset class="form-group row mb-0" *ngIf="formstep==2">
+            <legend class="col-form-legend col-sm-12">Form 2</legend>
+            <div class="col-sm-12" formGroupName="form2">
+
+              <!-- Form email field -->
+              <div class="form-group row">
+                <label for="inputEmail" class="col-sm-12 col-form-label">Email <span
+                    class="text-danger">*</span></label>
+                <div class="col-sm-12">
+                  <input type="email" class="form-control" formControlName="email" placeholder="Enter Email">
+                </div>
+              </div>
+              <!-- Form email field -->
+
+              <!-- Form output response field -->
+              <div>
+                <div>Form output response*</div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" formControlName="status" value="Success"> Success
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" formControlName="status" value="Error"> Error
+                  </label>
+                </div>
+              </div>
+              <!-- Form output response field -->
+
+              <div class="form-group row mt-4">
+                <div class="col-sm-10">
+                  <!-- From previous step button -->
+                  <button type="button" class="btn btn-secondary mr-3" (click)="stepChange(false)">
+                    Back
+                  </button>
+                  <!-- From previous step button -->
+                  <!-- Form Submit Button -->
+                  <button type="submit" class="btn btn-primary mr-3" [disabled]="forms.get('form2').invalid">
+                    Submit
+                  </button>
+                  <!-- Form Submit Button -->
+                  <!-- Form Reset Button -->
+                  <button type="button" class="btn btn-outline-primary" (click)="resetForm()">
+                    Reset
+                  </button>
+                  <!-- Form Reset Button -->
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+          <!-- ---------------------------------- -->
+          <!-- ---------------------------------- -->
+
+          <!-- ---------------------------------- -->
+          <!-- FORM STEP To handle the response from server -->
+          <!-- ---------------------------------- -->
+          <fieldset *ngIf="formstep==3">
+            <!-- Form Status Control Start -->
+            <div class="d-flex justify-content-center align-items-center flex-column bg-white p-5">
+              <i *ngIf="formStatus==1" aria-hidden="true" class="fa fa-spinner fa-spin fa-5x fa-fw text-primary"></i>
+              <i *ngIf="formStatus==2" aria-hidden="true" class="fa fa-check fa-5x text-success"></i>
+              <i *ngIf="formStatus==3" aria-hidden="true" class="fa fa-times fa-5x text-danger"></i>
+              <h5 class="text-center mt-4" [innerHTML]="statusMessage"></h5>
+              <button *ngIf="formStatus!==1" type="button" class="btn btn-link mt-1"
+                (click)="resetForm()">Reset</button>
+              <div *ngIf="formStatus!==1" class="mt-4">
+                <h6><strong>Response:</strong></h6>
+                <pre>{{response | json}}</pre>
+              </div>
+            </div>
+            <!-- Form Status Control End -->
+          </fieldset>
+          <!-- ---------------------------------- -->
+          <!-- ---------------------------------- -->
+
+        </form>
+        <!-- Form End -->
+      </div>
+
+
+    </div>
+  </div>
+</div>
